@@ -1,14 +1,13 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.util.concurrent.RateLimiter;
-import kong.unirest.core.HttpResponse;
-import kong.unirest.core.JsonNode;
 import kong.unirest.core.Unirest;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.Objects;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class CrptApi {
@@ -45,62 +44,71 @@ public class CrptApi {
         } catch (JsonProcessingException e) {
             throw new RuntimeException("Ошибка преобразования в JSON");
         }
+
     };
 
 //--------------------------------------------------
 
-    @Setter
     @Getter
+    @Builder
     public static class DocumentDto
     {
         //todo валидация полей при необходимости
+        //todo обязательные поля должны быть помещены в конструктор. Но перечень обязательных полей не определен
 
-        private String doc_id;
-        private String doc_status;
+        private final String doc_id;
+        private final String doc_status;
 
-        private DocType doc_type;
-        private boolean importRequest;
+        private final DocType doc_type;
+        private final boolean importRequest;
 
-        private String owner_inn;
-        private String participant_inn;
-        private String producer_inn;
+        private final String owner_inn;
+        private final String participant_inn;
+        private final String producer_inn;
 
-        private Date production_date;
+        private final Date production_date;
 
-        private String production_type;
+        private final String production_type;
 
-        private String reg_number;
-        private Date reg_date;
+        private final String reg_number;
+        private final Date reg_date;
+
+        private final List<ProductDto> products;
 
         //--------------------------------------------------
 
         @Setter
         @Getter
-        public static class DocumentDescription {
+        public static class DocumentDescriptionDto {
             //todo валидация полей при необходимости
-            private String participantInn;
+            private final String participantInn;
+
+            public DocumentDescriptionDto(String participantInn) {
+                this.participantInn = participantInn;
+            }
         }
 
         //--------------------------------------------------
 
         @Getter
-        @Setter
+        @Builder
         public static class ProductDto {
 
             //todo валидация полей при необходимости
+            //todo обязательные поля должны быть помещены в конструктор. Но перечень обязательных полей не определен
 
-            private String certificate_document;
-            private Date certificate_document_date;
-            private String certificate_document_number;
+            private  final String certificate_document;
+            private  final Date certificate_document_date;
+            private  final String certificate_document_number;
 
-            private String owner_inn;
-            private String producer_inn;
+            private final String owner_inn;
+            private final String producer_inn;
 
-            private Date production_date;
+            private final Date production_date;
 
-            private String tnved_code;
-            private String uit_code;
-            private String uitu_code;
+            private final String tnved_code;
+            private final String uit_code;
+            private final String uitu_code;
 
 
 
