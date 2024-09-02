@@ -52,8 +52,8 @@ public class CrptApi {
     @Getter
     @Builder
     public static class DocumentDto {
+
         //todo валидация полей при необходимости
-        //todo обязательные поля должны быть помещены в конструктор. Но перечень обязательных полей не определен
 
         private final String doc_id;
         private final String doc_status;
@@ -94,7 +94,6 @@ public class CrptApi {
         public static class ProductDto {
 
             //todo валидация полей при необходимости
-            //todo обязательные поля должны быть помещены в конструктор. Но перечень обязательных полей не определен
 
             private  final String certificate_document;
             private  final Date certificate_document_date;
